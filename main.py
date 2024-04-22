@@ -16,7 +16,7 @@ import tkinter as tk
 window = tk.Tk()
 window.title('W.O.T\tWorld Of Tic-Tac-Toe')
 window.geometry('800x800+0+0')
-window.resizable(False, False)
+# window.resizable(False, False)
 
 # 메인 화면에 main_title
 main_title = Label(master=window, text='World\nOf\nTic-Tac-Toe', font=('Algerian', 75))
@@ -24,13 +24,46 @@ main_title.place(x=30, y=30)
 
 
 # 메인 화면에 start_bt
-def start_game():
-    pass
+# 플레이어1과 플레이어2의 닉네임 입력 받음
+def enter_name():
+    # 이름 입력창 생성
+    name_win = tk.Toplevel(window)
+    name_win.title('Enter Player Names')
+    name_win.resizable(False, False)
+    name_win.grab_set()
+
+    label_player1 = tk.Label(name_win, text="Player 1 Name:", font=('Arial', 12))
+    label_player1.grid(row=0, column=0, padx=10, pady=10)
+    entry_player1 = tk.Entry(name_win, font=('Arial', 12))
+    entry_player1.grid(row=0, column=1, padx=10, pady=10)
+
+    label_player2 = tk.Label(name_win, text="Player 2 Name:", font=('Arial', 12))
+    label_player2.grid(row=1, column=0, padx=10, pady=10)
+    entry_player2 = tk.Entry(name_win, font=('Arial', 12))
+    entry_player2.grid(row=1, column=1, padx=10, pady=10)
+
+    def start_game():    # 게임 시작 버튼 생성
+        player1_name = entry_player1.get()
+        player2_name = entry_player2.get()
+        info(f"Player 1: {player1_name}, Player 2: {player2_name}")
+        name_win.destroy()  # 이름 입력창 닫기
+        # 게임 모드 선택 함수 호출
+
+    start_button = tk.Button(name_win, text="Start Game", font=('Arial', 12), command=start_game)
+    start_button.grid(row=2, columnspan=2, padx=10, pady=10)
+
+    def back_main():    # 메인 화면으로 되돌아감
+        name_win.destroy()  # 이름 입력창 닫기
+
+    back_button = tk.Button(name_win, text="Back", font=('Arial', 12), command=back_main)
+    back_button.grid(row=3, columnspan=2, padx=10, pady=10)
+
+    name_win.protocol("WM_DELETE_WINDOW", lambda: None)     # 이름 입력창 못끔/못내림
 
 
-start_bt = tk.Button(master=window, text='Game Start', font=('Arial', 15), width=25, height=3,
-                     command=start_game)
-start_bt.place(x=450, y=550-70)
+enter_name_bt = tk.Button(master=window, text='Game Start', font=('Arial', 15), width=25, height=3,
+                          command=enter_name)
+enter_name_bt.place(x=450, y=480)
 
 
 # 메인 화면에 quit_bt
@@ -38,8 +71,18 @@ def quit_win():
     window.quit()
 
 
-start_bt = tk.Button(master=window, text='Quit', font=('Arial', 15), width=25, height=3,
-                     command=quit_win)
-start_bt.place(x=450, y=670-70)
+enter_name_bt = tk.Button(master=window, text='Quit', font=('Arial', 15), width=25, height=3,
+                          command=quit_win)
+enter_name_bt.place(x=450, y=600)
+
+
+def select_game_mode():
+    game_mode_win = tk.Toplevel(window)
+    game_mode_win.title('Select Game Mode')
+    game_mode_win.resizable(False, False)
+    game_mode_win.grab_set()
+
+    game_3x3 = tk.Button(game_mode_win, text="3X3 Tic-Tac-Toe", font=('Arial', 15), width=25, height=3)
+
 
 window.mainloop()
