@@ -48,6 +48,7 @@ def enter_name():
         info(f"Player 1: {player1_name}, Player 2: {player2_name}")
         name_win.destroy()  # 이름 입력창 닫기
         # 게임 모드 선택 함수 호출
+        select_game_mode()
 
     start_button = tk.Button(name_win, text="Start Game", font=('Arial', 12), command=start_game)
     start_button.grid(row=2, columnspan=2, padx=10, pady=10)
@@ -82,7 +83,14 @@ def select_game_mode():
     game_mode_win.resizable(False, False)
     game_mode_win.grab_set()
 
-    game_3x3 = tk.Button(game_mode_win, text="3X3 Tic-Tac-Toe", font=('Arial', 15), width=25, height=3)
+    def play_game_3x3():
+        info(f"Play 3x3 tic-tac-toe")
+        game_mode_win.destroy()
+        # 게임 플레이 함수 호출
+
+    game_3x3_bt = tk.Button(game_mode_win, text="3X3 Tic-Tac-Toe", font=('Arial', 15), width=25, height=3,
+                            command=play_game_3x3)
+    game_3x3_bt.grid(row=0, column=0, padx=10, pady=10)
 
 
 window.mainloop()
