@@ -14,6 +14,16 @@ class TicTacToe:
 
         self.create_board()
         self.create_player_turn_label()
+        self.create_menu()
+
+    def create_menu(self):
+        self.top_menu = tk.Menu()
+        self.menu_file = tk.Menu(master=self.top_menu, tearoff=False)
+        self.menu_file.add_command(label='Board Reset')     # 보드 초기화
+        self.menu_file.add_command(label='Quit Game')       # 메인으로 돌아감
+        self.top_menu.add_cascade(label='Game Options', menu=self.menu_file)
+
+        self.root.config(menu=self.top_menu)
 
     def create_board(self):
         for i in range(3):
