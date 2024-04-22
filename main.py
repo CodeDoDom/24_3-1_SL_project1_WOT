@@ -45,7 +45,9 @@ def enter_name():
     entry_player2.grid(row=1, column=1, padx=10, pady=10)
 
     def start_game():    # 게임 시작 버튼 생성
+        global player1_name
         player1_name = entry_player1.get()
+        global player2_name
         player2_name = entry_player2.get()
         info(f"Player 1: {player1_name}, Player 2: {player2_name}")
         name_win.destroy()  # 이름 입력창 닫기
@@ -92,9 +94,9 @@ def select_game_mode():
         game_3x3_win = tk.Toplevel(window)
         game_3x3_win.resizable(False, False)
         game_3x3_win.grab_set()
-        game_3x3 = TicTacToe(game_3x3_win)
+        game_3x3 = TicTacToe(game_3x3_win, player1_name, player2_name)
 
-        game_3x3_win.protocol("WM_DELETE_WINDOW", lambda: None)
+        # game_3x3_win.protocol("WM_DELETE_WINDOW", lambda: None)
 
     game_3x3_bt = tk.Button(select_mode_win, text="3X3 Tic-Tac-Toe", font=('Arial', 15), width=25, height=3,
                             command=play_game_3x3)
