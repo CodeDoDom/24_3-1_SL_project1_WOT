@@ -38,6 +38,7 @@ class TicTacToe:
         self.player_turn_label.grid(row=3, columnspan=3)
 
     def on_button_click(self, row, col):
+        # 0423_게임 결과 메세지 박스가 출력되는 중에도 보드를 클릭할 수 있음. 게임 플레이에 영향은 없음...
         if self.board[row][col] == "":
             self.board[row][col] = self.current_player
             self.buttons[row][col].config(text=self.current_player)
