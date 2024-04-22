@@ -12,6 +12,8 @@ from tkinter import filedialog
 
 import tkinter as tk
 
+from TicTacToe_3x3 import TicTacToe
+
 # 티킨터 생성
 window = tk.Tk()
 window.title('W.O.T\tWorld Of Tic-Tac-Toe')
@@ -78,17 +80,23 @@ enter_name_bt.place(x=450, y=600)
 
 
 def select_game_mode():
-    game_mode_win = tk.Toplevel(window)
-    game_mode_win.title('Select Game Mode')
-    game_mode_win.resizable(False, False)
-    game_mode_win.grab_set()
+    select_mode_win = tk.Toplevel(window)
+    select_mode_win.title('Select Game Mode')
+    select_mode_win.resizable(False, False)
+    select_mode_win.grab_set()
 
     def play_game_3x3():
         info(f"Play 3x3 tic-tac-toe")
-        game_mode_win.destroy()
-        # 게임 플레이 함수 호출
+        select_mode_win.destroy()
 
-    game_3x3_bt = tk.Button(game_mode_win, text="3X3 Tic-Tac-Toe", font=('Arial', 15), width=25, height=3,
+        game_3x3_win = tk.Toplevel(window)
+        game_3x3_win.resizable(False, False)
+        game_3x3_win.grab_set()
+        game_3x3 = TicTacToe(game_3x3_win)
+
+        game_3x3_win.protocol("WM_DELETE_WINDOW", lambda: None)
+
+    game_3x3_bt = tk.Button(select_mode_win, text="3X3 Tic-Tac-Toe", font=('Arial', 15), width=25, height=3,
                             command=play_game_3x3)
     game_3x3_bt.grid(row=0, column=0, padx=10, pady=10)
 
