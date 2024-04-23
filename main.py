@@ -118,5 +118,15 @@ def select_game_mode():
                             command=play_game_6x6)
     game_6x6_bt.grid(row=1, column=0, padx=10, pady=10)
 
+    def description_checked():
+        info(f'description_CheckButton updated {checked.get()}')
+
+    # 게임설명 checkbutton
+    checked = BooleanVar(value=True)
+    description_checkbutton = Checkbutton(select_mode_win,text='Game Description',
+                                          command=description_checked, variable=checked)
+    description_checkbutton.grid(row=2, column=0, padx=10, pady=10)
+
+
 
 window.mainloop()
