@@ -96,7 +96,7 @@ def select_game_mode():
         game_3x3_win.grab_set()
         game_3x3 = TicTacToe(game_3x3_win, player1_name, player2_name)
 
-        # game_3x3_win.protocol("WM_DELETE_WINDOW", lambda: None)
+        game_3x3_win.protocol("WM_DELETE_WINDOW", lambda: None)
 
     game_3x3_bt = tk.Button(select_mode_win, text="3X3 Tic-Tac-Toe", font=('Arial', 15), width=25, height=3,
                             command=play_game_3x3)

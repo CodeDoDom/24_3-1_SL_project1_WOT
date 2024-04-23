@@ -67,13 +67,13 @@ class TicTacToe:
         self.disable_buttons()
         Messagebox.showinfo("Winner", f"{self.current_player_name} {self.current_player} wins!")
         self.enable_buttons()
-        self.reset_game()
+        self.continue_game()
 
     def show_draw_message(self):
         self.disable_buttons()
         Messagebox.showinfo("Draw", "The game is a draw!")
         self.enable_buttons()
-        self.reset_game()
+        self.continue_game()
 
     def check_winner(self):
         for i in range(3):
@@ -110,4 +110,12 @@ class TicTacToe:
             Messagebox.showinfo('Quit Game', 'Quit the game.\nGood Bye!')
             self.root.destroy()
         else:
+            self.reset_game()
             self.enable_buttons()
+
+    def continue_game(self):
+        answer = Messagebox.askyesno('Continue Game', 'Would you like to continue playing?')
+        if answer is True:
+            self.reset_game()
+        else:
+            self.back_main()
