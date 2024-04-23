@@ -13,6 +13,7 @@ from tkinter import filedialog
 import tkinter as tk
 
 from TicTacToe_3x3 import TicTacToe
+from FourMok_6x6 import FourMok
 
 # 티킨터 생성
 window = tk.Tk()
@@ -98,9 +99,24 @@ def select_game_mode():
 
         game_3x3_win.protocol("WM_DELETE_WINDOW", lambda: None)
 
+    def play_game_6x6():
+        info(f"Play 6x6 FourMok")
+        select_mode_win.destroy()
+
+        game_6x6_win = tk.Toplevel(window)
+        game_6x6_win.resizable(False, False)
+        game_6x6_win.grab_set()
+        game_6x6 = FourMok(game_6x6_win, player1_name, player2_name)
+
+        game_6x6_win.protocol("WM_DELETE_WINDOW", lambda: None)
+
     game_3x3_bt = tk.Button(select_mode_win, text="3X3 Tic-Tac-Toe", font=('Arial', 15), width=25, height=3,
                             command=play_game_3x3)
     game_3x3_bt.grid(row=0, column=0, padx=10, pady=10)
+
+    game_6x6_bt = tk.Button(select_mode_win, text="6x6 FourMok", font=('Arial', 15), width=25, height=3,
+                            command=play_game_6x6)
+    game_6x6_bt.grid(row=1, column=0, padx=10, pady=10)
 
 
 window.mainloop()
