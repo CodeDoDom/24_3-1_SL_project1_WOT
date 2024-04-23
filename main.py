@@ -11,6 +11,7 @@ from tkinter.ttk import *
 from tkinter import filedialog
 
 import tkinter as tk
+import tkinter.messagebox as Messagebox
 
 from TicTacToe_3x3 import TicTacToe
 from FourMok_6x6 import FourMok
@@ -92,6 +93,11 @@ def select_game_mode():
         info(f"Play 3x3 tic-tac-toe")
         select_mode_win.destroy()
 
+        mode = "game_3x3"
+
+        if description_checked.get():
+            show_description(mode)
+
         game_3x3_win = tk.Toplevel(window)
         game_3x3_win.resizable(False, False)
         game_3x3_win.grab_set()
@@ -102,6 +108,11 @@ def select_game_mode():
     def play_game_6x6():
         info(f"Play 6x6 FourMok")
         select_mode_win.destroy()
+
+        mode = "game_6x6"
+
+        if description_checked.get():
+            show_description(mode)
 
         game_6x6_win = tk.Toplevel(window)
         game_6x6_win.resizable(False, False)
@@ -118,13 +129,17 @@ def select_game_mode():
                             command=play_game_6x6)
     game_6x6_bt.grid(row=1, column=0, padx=10, pady=10)
 
-    def description_checked():
-        info(f'description_CheckButton updated {checked.get()}')
+    def show_description(mode):     # 게임 시작 전 게임 설명 메세지 박스(윈도우로 바꿀 수도 있음) 출력
+        if mode == "game_3x3":
+            Messagebox.showinfo('3x3 Tic-Tac-Toe', "How To Play '3x3 Tic-Tac-Toe'")
+
+        if mode == "game_6x6":
+            Messagebox.showinfo('6x6 FourMok', "How To Play '6x6 FourMok'")
 
     # 게임설명 checkbutton
-    checked = BooleanVar(value=True)
-    description_checkbutton = Checkbutton(select_mode_win,text='Game Description',
-                                          command=description_checked, variable=checked)
+    description_checked = BooleanVar(value=True)
+    description_checkbutton = Checkbutton(select_mode_win, text='Game Description',
+                                          variable=description_checked)
     description_checkbutton.grid(row=2, column=0, padx=10, pady=10)
 
 
