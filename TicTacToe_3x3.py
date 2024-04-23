@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
+# from tkinter import messagebox
+import tkinter.messagebox as Messagebox
 
 class TicTacToe:
     def __init__(self, root, p1_name, p2_name):
@@ -19,7 +20,7 @@ class TicTacToe:
     def create_menu(self):
         self.top_menu = tk.Menu()
         self.menu_file = tk.Menu(master=self.top_menu, tearoff=False)
-        self.menu_file.add_command(label='Board Reset')     # 보드 초기화
+        self.menu_file.add_command(label='Board Reset', command=self.reset_game)     # 보드 초기화
         self.menu_file.add_command(label='Quit Game')       # 메인으로 돌아감
         self.top_menu.add_cascade(label='Game Options', menu=self.menu_file)
 
@@ -43,15 +44,35 @@ class TicTacToe:
             self.board[row][col] = self.current_player
             self.buttons[row][col].config(text=self.current_player)
             if self.check_winner():
-                messagebox.showinfo("Winner", f"{self.current_player_name} {self.current_player} wins!")
-                self.reset_game()
+                self.show_winner_message()
             elif self.check_draw():
-                messagebox.showinfo("Draw", "The game is a draw!")
-                self.reset_game()
+                self.show_draw_message()
             else:
                 self.current_player = "O" if self.current_player == "X" else "X"
                 self.current_player_name = self.player1_name if self.current_player == "X" else self.player2_name
                 self.player_turn_label.config(text=f"Player {self.current_player_name} {self.current_player}'s turn")
+
+    def disable_buttons(self):
+        for row in self.buttons:
+            for button in row:
+                button.config(state=tk.DISABLED)
+
+    def enable_buttons(self):
+        for row in self.buttons:
+            for button in row:
+                button.config(state=tk.NORMAL)
+
+    def show_winner_message(self):
+        self.disable_buttons()
+        Messagebox.showinfo("Winner", f"{self.current_player_name} {self.current_player} wins!")
+        self.enable_buttons()
+        self.reset_game()
+
+    def show_draw_message(self):
+        self.disable_buttons()
+        Messagebox.showinfo("Draw", "The game is a draw!")
+        self.enable_buttons()
+        self.reset_game()
 
     def check_winner(self):
         for i in range(3):
