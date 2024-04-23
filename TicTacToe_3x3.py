@@ -21,7 +21,7 @@ class TicTacToe:
         self.top_menu = tk.Menu()
         self.menu_file = tk.Menu(master=self.top_menu, tearoff=False)
         self.menu_file.add_command(label='Board Reset', command=self.reset_game)     # 보드 초기화
-        self.menu_file.add_command(label='Quit Game')       # 메인으로 돌아감
+        self.menu_file.add_command(label='Quit Game', command=self.back_main)       # 메인으로 돌아감
         self.top_menu.add_cascade(label='Game Options', menu=self.menu_file)
 
         self.root.config(menu=self.top_menu)
@@ -39,7 +39,6 @@ class TicTacToe:
         self.player_turn_label.grid(row=3, columnspan=3)
 
     def on_button_click(self, row, col):
-        # 0423_게임 결과 메세지 박스가 출력되는 중에도 보드를 클릭할 수 있음. 게임 플레이에 영향은 없음...
         if self.board[row][col] == "":
             self.board[row][col] = self.current_player
             self.buttons[row][col].config(text=self.current_player)
@@ -53,11 +52,13 @@ class TicTacToe:
                 self.player_turn_label.config(text=f"Player {self.current_player_name} {self.current_player}'s turn")
 
     def disable_buttons(self):
+        self.top_menu.entryconfig('Game Options', state=tk.DISABLED)
         for row in self.buttons:
             for button in row:
                 button.config(state=tk.DISABLED)
 
     def enable_buttons(self):
+        self.top_menu.entryconfig('Game Options', state=tk.NORMAL)
         for row in self.buttons:
             for button in row:
                 button.config(state=tk.NORMAL)
@@ -101,3 +102,12 @@ class TicTacToe:
         self.current_player = "X"
         self.current_player_name = self.player1_name
         self.player_turn_label.config(text=f"Player {self.current_player_name} {self.current_player}'s turn")
+
+    def back_main(self):
+        self.disable_buttons()
+        answer = Messagebox.askyesno('Quit Game', 'Do you really want to quit?')
+        if answer is True:
+            Messagebox.showinfo('Quit Game', 'Quit the game.\nGood Bye!')
+            self.root.destroy()
+        else:
+            self.enable_buttons()
