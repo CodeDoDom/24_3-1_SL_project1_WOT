@@ -134,7 +134,17 @@ def select_game_mode():
             Messagebox.showinfo('3x3 Tic-Tac-Toe', "How To Play '3x3 Tic-Tac-Toe'")
 
         if mode == "game_6x6":
-            Messagebox.showinfo('6x6 FourMok', "How To Play '6x6 FourMok'")
+            desc_win = tk.Toplevel(window)
+            desc_win.title("How To Play '6x6 FourMok'")
+            desc_win.resizable(False, False)
+
+            desc_rule_label = Label(desc_win, text='''[ 게임 규칙 ]
+
+            1. 플레이어는 자신의 차례에 6x6 보드의 빈 공간에 자신의 마크(X 또는 O)를 놓습니다.
+            2. 플레이어가 가로, 세로 또는 대각선 방향으로 연속된 네 개의 마크를 놓으면 승리합니다.
+            3. 연속된 네 개의 마크가 놓이지 않은 채 보드에 빈 공간이 사라진 경우 무승부로 판정됩니다.
+            ''', font=('Arial', 15))
+            desc_rule_label.grid(padx=10)
 
     # 게임설명 checkbutton
     description_checked = BooleanVar(value=True)
