@@ -110,7 +110,6 @@ class TicTacToe:
             Messagebox.showinfo('Quit Game', 'Quit the game.\nGood Bye!')
             self.root.destroy()
         else:
-            self.reset_game()
             self.enable_buttons()
 
     def continue_game(self):
