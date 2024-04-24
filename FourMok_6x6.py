@@ -10,8 +10,8 @@ class FourMok:
         self.current_player_name = p1_name
         self.player1_name = p1_name
         self.player2_name = p2_name
-        self.board = [["" for _ in range(3)] for _ in range(3)]
-        self.buttons = [[None for _ in range(3)] for _ in range(3)]
+        self.board = [["" for _ in range(6)] for _ in range(6)]
+        self.buttons = [[None for _ in range(6)] for _ in range(6)]
 
         self.create_board()
         self.create_player_turn_label()
@@ -27,16 +27,16 @@ class FourMok:
         self.root.config(menu=self.top_menu)
 
     def create_board(self):
-        for i in range(3):
-            for j in range(3):
-                button = tk.Button(self.root, text="", font=("Helvetica", 20), width=15, height=6,
+        for i in range(6):
+            for j in range(6):
+                button = tk.Button(self.root, text="", font=("Helvetica", 20), width=5, height=2,
                                    command=lambda row=i, col=j: self.on_button_click(row, col))
                 button.grid(row=i, column=j)
                 self.buttons[i][j] = button
 
     def create_player_turn_label(self):
         self.player_turn_label = tk.Label(self.root, text=f"Player {self.current_player_name} {self.current_player}'s turn", font=("Helvetica", 16))
-        self.player_turn_label.grid(row=3, columnspan=3)
+        self.player_turn_label.grid(row=6, columnspan=6)
 
     def on_button_click(self, row, col):
         if self.board[row][col] == "":
@@ -76,15 +76,18 @@ class FourMok:
         self.continue_game()
 
     def check_winner(self):
-        for i in range(3):
-            if self.board[i][0] == self.board[i][1] == self.board[i][2] != "":
-                return True
-            if self.board[0][i] == self.board[1][i] == self.board[2][i] != "":
-                return True
-        if self.board[0][0] == self.board[1][1] == self.board[2][2] != "":
-            return True
-        if self.board[0][2] == self.board[1][1] == self.board[2][0] != "":
-            return True
+        for i in range(6):
+            for j in range(3):
+                if self.board[i][j] == self.board[i][j+1] == self.board[i][j+2] == self.board[i][j+3] != "":
+                    return True
+                if self.board[j][i] == self.board[j+1][i] == self.board[j+2][i] == self.board[j+3][i] != "":
+                    return True
+
+        # 대각선 승리 조건
+        # if self.board[0][0] == self.board[1][1] == self.board[2][2] != "":
+        #     return True
+        # if self.board[0][2] == self.board[1][1] == self.board[2][0] != "":
+        #     return True
         return False
 
     def check_draw(self):
@@ -95,8 +98,8 @@ class FourMok:
         return True
 
     def reset_game(self):
-        for i in range(3):
-            for j in range(3):
+        for i in range(6):
+            for j in range(6):
                 self.board[i][j] = ""
                 self.buttons[i][j].config(text="")
         self.current_player = "X"
@@ -110,7 +113,6 @@ class FourMok:
             Messagebox.showinfo('Quit Game', 'Quit the game.\nGood Bye!')
             self.root.destroy()
         else:
-            self.reset_game()
             self.enable_buttons()
 
     def continue_game(self):
