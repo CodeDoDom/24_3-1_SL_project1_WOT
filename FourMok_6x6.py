@@ -83,11 +83,18 @@ class FourMok:
                 if self.board[j][i] == self.board[j+1][i] == self.board[j+2][i] == self.board[j+3][i] != "":
                     return True
 
-        # 대각선 승리 조건
-        # if self.board[0][0] == self.board[1][1] == self.board[2][2] != "":
-        #     return True
-        # if self.board[0][2] == self.board[1][1] == self.board[2][0] != "":
-        #     return True
+        # 대각선( \ )
+        for i in range(3):
+            for j in range(3):
+                if self.board[i][j] == self.board[i+1][j+1] == self.board[i+2][j+2] == self.board[i+3][j+3] != "":
+                    return True
+
+        # 대각선( / )
+        for i in range(3):
+            for j in range(3, 6):
+                if self.board[i][j] == self.board[i+1][j-1] == self.board[i+2][j-2] == self.board[i+3][j-3] != "":
+                    return True
+
         return False
 
     def check_draw(self):
