@@ -117,7 +117,7 @@ class FourMok:
         self.disable_buttons()
         answer = Messagebox.askyesno('Quit Game', 'Do you really want to quit?')
         if answer is True:
-            Messagebox.showinfo('Quit Game', 'Quit the game.\nGood Bye!')
+            Messagebox.showinfo('Quit Game', 'Quit the game.\nBack to main.')
             self.root.destroy()
         else:
             self.enable_buttons()
