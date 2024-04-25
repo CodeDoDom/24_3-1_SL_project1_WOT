@@ -28,6 +28,21 @@ desc_game_3x3_image = PhotoImage(file=image_game_3x3_path)
 image_game_6x6_path = "6x6_FourMok.png"
 desc_game_6x6_image = PhotoImage(file=image_game_6x6_path)
 
+dog_1_path = "dog1.png"
+dog_1_image = PhotoImage(file=dog_1_path)
+
+dog_2_path = "dog2.png"
+dog_2_image = PhotoImage(file=dog_2_path)
+
+dog_3_path = "dog3.png"
+dog_3_image = PhotoImage(file=dog_3_path)
+
+dog_4_path = "dog4.png"
+dog_4_image = PhotoImage(file=dog_4_path)
+
+dog_nose_path = "dog_nose.png"
+dog_nose_image = PhotoImage(file=dog_nose_path)
+
 # 메인 화면에 main_title
 main_title = Label(master=window, text='World\nOf\nTic-Tac-Toe', font=('Algerian', 75))
 main_title.place(x=30, y=30)
@@ -35,6 +50,30 @@ main_title.place(x=30, y=30)
 
 # 메인 화면에 start_bt
 # 플레이어1과 플레이어2의 닉네임 입력 받음
+def that_is_dog_name(name1, name2):
+    dog_lists = ["호야", "하늘", "바다", "산", "개코"]
+    for dog in dog_lists:
+        if (dog in name1) or (dog in name2):
+            info(f"플레이어 이름에 '{dog}'이 포함되어 있음")
+            dog_img_win = tk.Toplevel(window)
+            dog_img_win.title('Dog')
+            if dog == "호야":
+                dog_image_label = Label(dog_img_win, image=dog_1_image)
+                dog_image_label.pack()
+            elif dog == "하늘":
+                dog_image_label = Label(dog_img_win, image=dog_2_image)
+                dog_image_label.pack()
+            elif dog == "바다":
+                dog_image_label = Label(dog_img_win, image=dog_3_image)
+                dog_image_label.pack()
+            elif dog == "산":
+                dog_image_label = Label(dog_img_win, image=dog_4_image)
+                dog_image_label.pack()
+            elif dog == "개코":
+                dog_image_label = Label(dog_img_win, image=dog_nose_image)
+                dog_image_label.pack()
+
+
 def enter_name():
     # 이름 입력창 생성
     name_win = tk.Toplevel(window)
@@ -59,6 +98,7 @@ def enter_name():
         player2_name = entry_player2.get()
         info(f"Player 1: {player1_name}, Player 2: {player2_name}")
         name_win.destroy()  # 이름 입력창 닫기
+        that_is_dog_name(player1_name, player2_name)
         # 게임 모드 선택 함수 호출
         select_game_mode()
 
