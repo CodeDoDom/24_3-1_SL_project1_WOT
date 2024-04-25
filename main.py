@@ -22,6 +22,12 @@ window.title('W.O.T\tWorld Of Tic-Tac-Toe')
 window.geometry('800x800+0+0')
 # window.resizable(False, False)
 
+image_game_3x3_path = "3x3_TicTacToe.png"
+desc_game_3x3_image = PhotoImage(file=image_game_3x3_path)
+
+image_game_6x6_path = "6x6_FourMok.png"
+desc_game_6x6_image = PhotoImage(file=image_game_6x6_path)
+
 # 메인 화면에 main_title
 main_title = Label(master=window, text='World\nOf\nTic-Tac-Toe', font=('Algerian', 75))
 main_title.place(x=30, y=30)
@@ -145,6 +151,9 @@ def select_game_mode():
             3. 연속된 네 개의 마크가 놓이지 않은 채 보드에 빈 공간이 사라진 경우 무승부로 판정됩니다.
             ''', font=('Arial', 15))
             desc_rule_label.grid(padx=10)
+
+            image_label = Label(desc_win, image=desc_game_6x6_image)
+            image_label.grid(row=1, pady=20)
 
     # 게임설명 checkbutton
     description_checked = BooleanVar(value=True)
