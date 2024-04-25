@@ -1,5 +1,4 @@
 import tkinter as tk
-# from tkinter import messagebox
 import tkinter.messagebox as Messagebox
 
 class FourMok:
@@ -8,6 +7,7 @@ class FourMok:
         self.root.title("6x6 FourMok")
         self.current_player = "X"
         self.current_player_name = p1_name
+        self.current_player_color = "red"
         self.player1_name = p1_name
         self.player2_name = p2_name
         self.board = [["" for _ in range(6)] for _ in range(6)]
@@ -37,11 +37,16 @@ class FourMok:
     def create_player_turn_label(self):
         self.player_turn_label = tk.Label(self.root, text=f"Player {self.current_player_name} {self.current_player}'s turn", font=("Helvetica", 16))
         self.player_turn_label.grid(row=6, columnspan=6)
+        self.update_player_turn_label()
+
+    def update_player_turn_label(self):
+        self.player_turn_label.config(text=f"Player {self.current_player_name} {self.current_player}'s turn",
+                                      bg=self.current_player_color)
 
     def on_button_click(self, row, col):
         if self.board[row][col] == "":
             self.board[row][col] = self.current_player
-            self.buttons[row][col].config(text=self.current_player)
+            self.buttons[row][col].config(text=self.current_player, fg=self.current_player_color)
             if self.check_winner():
                 self.show_winner_message()
             elif self.check_draw():
@@ -49,7 +54,8 @@ class FourMok:
             else:
                 self.current_player = "O" if self.current_player == "X" else "X"
                 self.current_player_name = self.player1_name if self.current_player == "X" else self.player2_name
-                self.player_turn_label.config(text=f"Player {self.current_player_name} {self.current_player}'s turn")
+                self.current_player_color = "red" if self.current_player == "X" else "blue"
+                self.update_player_turn_label()
 
     def disable_buttons(self):
         self.top_menu.entryconfig('Game Options', state=tk.DISABLED)
@@ -111,7 +117,8 @@ class FourMok:
                 self.buttons[i][j].config(text="")
         self.current_player = "X"
         self.current_player_name = self.player1_name
-        self.player_turn_label.config(text=f"Player {self.current_player_name} {self.current_player}'s turn")
+        self.current_player_color = "red"
+        self.update_player_turn_label()
 
     def back_main(self):
         self.disable_buttons()
