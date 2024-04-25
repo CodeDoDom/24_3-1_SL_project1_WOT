@@ -1,4 +1,5 @@
 import logging
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(filename)s(%(lineno)d): %(asctime)s - %(levelname)s - %(message)s'
@@ -8,10 +9,8 @@ from logging import info as info, debug as debug, warning as warning
 
 from tkinter import *
 from tkinter.ttk import *
-from tkinter import filedialog
 
 import tkinter as tk
-import tkinter.messagebox as Messagebox
 
 from TicTacToe_3x3 import TicTacToe
 from FourMok_6x6 import FourMok
@@ -20,7 +19,7 @@ from FourMok_6x6 import FourMok
 window = tk.Tk()
 window.title('W.O.T\tWorld Of Tic-Tac-Toe')
 window.geometry('800x800+0+0')
-# window.resizable(False, False)
+window.resizable(False, False)
 
 image_game_3x3_path = "3x3_TicTacToe.png"
 desc_game_3x3_image = PhotoImage(file=image_game_3x3_path)
@@ -67,7 +66,7 @@ def enter_name():
     entry_player2 = tk.Entry(name_win, font=('Arial', 12))
     entry_player2.grid(row=1, column=1, padx=10, pady=10)
 
-    def start_game():    # 게임 시작 버튼 생성
+    def start_game():  # 게임 시작 버튼 생성
         global player1_name
         player1_name = entry_player1.get()
         global player2_name
@@ -81,13 +80,13 @@ def enter_name():
     start_button = tk.Button(name_win, text="Start Game", font=('Arial', 12), command=start_game)
     start_button.grid(row=2, columnspan=2, padx=10, pady=10)
 
-    def back_main():    # 메인 화면으로 되돌아감
+    def back_main():  # 메인 화면으로 되돌아감
         name_win.destroy()  # 이름 입력창 닫기
 
     back_button = tk.Button(name_win, text="Back", font=('Arial', 12), command=back_main)
     back_button.grid(row=3, columnspan=2, padx=10, pady=10)
 
-    name_win.protocol("WM_DELETE_WINDOW", lambda: None)     # 이름 입력창 못끔/못내림
+    name_win.protocol("WM_DELETE_WINDOW", lambda: None)  # 이름 입력창 못끔/못내림
 
 
 def that_is_dog_name(name1, name2):
@@ -174,7 +173,7 @@ def select_game_mode():
                             command=play_game_6x6)
     game_6x6_bt.grid(row=1, column=0, padx=10, pady=10)
 
-    def show_description(mode):     # 게임 시작 전 게임 설명 메세지 박스(윈도우로 바꿀 수도 있음) 출력
+    def show_description(mode):  # 게임 시작 전 게임 설명 메세지 박스(윈도우로 바꿀 수도 있음) 출력
         if mode == "game_3x3":
             desc_win = tk.Toplevel(window)
             desc_win.title("How To Play '3x3 TicTacToe'")
@@ -212,7 +211,6 @@ def select_game_mode():
     description_checkbutton = Checkbutton(select_mode_win, text='Game Description',
                                           variable=description_checked)
     description_checkbutton.grid(row=2, column=0, padx=10, pady=10)
-
 
 
 window.mainloop()

@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.messagebox as Messagebox
 
+
 class FourMok:
     def __init__(self, root, p1_name, p2_name):
         self.root = root
@@ -20,8 +21,8 @@ class FourMok:
     def create_menu(self):
         self.top_menu = tk.Menu()
         self.menu_file = tk.Menu(master=self.top_menu, tearoff=False)
-        self.menu_file.add_command(label='Board Reset', command=self.reset_game)     # 보드 초기화
-        self.menu_file.add_command(label='Quit Game', command=self.back_main)       # 메인으로 돌아감
+        self.menu_file.add_command(label='Board Reset', command=self.reset_game)  # 보드 초기화
+        self.menu_file.add_command(label='Quit Game', command=self.back_main)  # 메인으로 돌아감
         self.top_menu.add_cascade(label='Game Options', menu=self.menu_file)
 
         self.root.config(menu=self.top_menu)
@@ -35,7 +36,9 @@ class FourMok:
                 self.buttons[i][j] = button
 
     def create_player_turn_label(self):
-        self.player_turn_label = tk.Label(self.root, text=f"Player {self.current_player_name}'s turn: {self.current_player}", font=("Helvetica", 16))
+        self.player_turn_label = tk.Label(self.root,
+                                          text=f"Player {self.current_player_name}'s turn: {self.current_player}",
+                                          font=("Helvetica", 16))
         self.player_turn_label.grid(row=6, columnspan=6)
         self.update_player_turn_label()
 
@@ -84,21 +87,21 @@ class FourMok:
     def check_winner(self):
         for i in range(6):
             for j in range(3):
-                if self.board[i][j] == self.board[i][j+1] == self.board[i][j+2] == self.board[i][j+3] != "":
+                if self.board[i][j] == self.board[i][j + 1] == self.board[i][j + 2] == self.board[i][j + 3] != "":
                     return True
-                if self.board[j][i] == self.board[j+1][i] == self.board[j+2][i] == self.board[j+3][i] != "":
+                if self.board[j][i] == self.board[j + 1][i] == self.board[j + 2][i] == self.board[j + 3][i] != "":
                     return True
 
         # 대각선( \ )
         for i in range(3):
             for j in range(3):
-                if self.board[i][j] == self.board[i+1][j+1] == self.board[i+2][j+2] == self.board[i+3][j+3] != "":
+                if self.board[i][j] == self.board[i + 1][j + 1] == self.board[i + 2][j + 2] == self.board[i + 3][j + 3] != "":
                     return True
 
         # 대각선( / )
         for i in range(3):
             for j in range(3, 6):
-                if self.board[i][j] == self.board[i+1][j-1] == self.board[i+2][j-2] == self.board[i+3][j-3] != "":
+                if self.board[i][j] == self.board[i + 1][j - 1] == self.board[i + 2][j - 2] == self.board[i + 3][j - 3] != "":
                     return True
 
         return False

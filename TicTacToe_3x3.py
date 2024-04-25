@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.messagebox as Messagebox
 
+
 class TicTacToe:
     def __init__(self, root, p1_name, p2_name):
         self.root = root
@@ -20,8 +21,8 @@ class TicTacToe:
     def create_menu(self):
         self.top_menu = tk.Menu()
         self.menu_file = tk.Menu(master=self.top_menu, tearoff=False)
-        self.menu_file.add_command(label='Board Reset', command=self.reset_game)     # 보드 초기화
-        self.menu_file.add_command(label='Quit Game', command=self.back_main)       # 메인으로 돌아감
+        self.menu_file.add_command(label='Board Reset', command=self.reset_game)  # 보드 초기화
+        self.menu_file.add_command(label='Quit Game', command=self.back_main)  # 메인으로 돌아감
         self.top_menu.add_cascade(label='Game Options', menu=self.menu_file)
 
         self.root.config(menu=self.top_menu)
@@ -35,7 +36,9 @@ class TicTacToe:
                 self.buttons[i][j] = button
 
     def create_player_turn_label(self):
-        self.player_turn_label = tk.Label(self.root, text=f"Player {self.current_player_name}'s turn: {self.current_player}", font=("Helvetica", 16))
+        self.player_turn_label = tk.Label(self.root,
+                                          text=f"Player {self.current_player_name}'s turn: {self.current_player}",
+                                          font=("Helvetica", 16))
         self.player_turn_label.grid(row=3, columnspan=3)
         self.update_player_turn_label()
 
