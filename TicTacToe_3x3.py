@@ -35,12 +35,13 @@ class TicTacToe:
                 self.buttons[i][j] = button
 
     def create_player_turn_label(self):
-        self.player_turn_label = tk.Label(self.root, text=f"Player {self.current_player_name} {self.current_player}'s turn", font=("Helvetica", 16))
+        self.player_turn_label = tk.Label(self.root, text=f"Player {self.current_player_name}'s turn: {self.current_player}", font=("Helvetica", 16))
         self.player_turn_label.grid(row=3, columnspan=3)
         self.update_player_turn_label()
 
     def update_player_turn_label(self):
-        self.player_turn_label.config(text=f"Player {self.current_player_name} {self.current_player}'s turn", bg=self.current_player_color)
+        self.player_turn_label.config(text=f"Player {self.current_player_name}'s turn: {self.current_player}",
+                                      bg=self.current_player_color, fg="white")
 
     def on_button_click(self, row, col):
         if self.board[row][col] == "":
@@ -70,7 +71,7 @@ class TicTacToe:
 
     def show_winner_message(self):
         self.disable_buttons()
-        Messagebox.showinfo("Winner", f"{self.current_player_name} {self.current_player} wins!")
+        Messagebox.showinfo("Winner", f"Player {self.current_player_name}({self.current_player}) is winner!")
         self.enable_buttons()
         self.continue_game()
 
