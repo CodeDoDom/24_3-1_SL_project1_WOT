@@ -50,30 +50,6 @@ main_title.place(x=30, y=30)
 
 # 메인 화면에 start_bt
 # 플레이어1과 플레이어2의 닉네임 입력 받음
-def that_is_dog_name(name1, name2):
-    dog_lists = ["호야", "하늘", "바다", "산", "개코"]
-    for dog in dog_lists:
-        if (dog in name1) or (dog in name2):
-            info(f"플레이어 이름에 '{dog}'이 포함되어 있음")
-            dog_img_win = tk.Toplevel(window)
-            dog_img_win.title('Dog')
-            if dog == "호야":
-                dog_image_label = Label(dog_img_win, image=dog_1_image)
-                dog_image_label.pack()
-            elif dog == "하늘":
-                dog_image_label = Label(dog_img_win, image=dog_2_image)
-                dog_image_label.pack()
-            elif dog == "바다":
-                dog_image_label = Label(dog_img_win, image=dog_3_image)
-                dog_image_label.pack()
-            elif dog == "산":
-                dog_image_label = Label(dog_img_win, image=dog_4_image)
-                dog_image_label.pack()
-            elif dog == "개코":
-                dog_image_label = Label(dog_img_win, image=dog_nose_image)
-                dog_image_label.pack()
-
-
 def enter_name():
     # 이름 입력창 생성
     name_win = tk.Toplevel(window)
@@ -114,6 +90,30 @@ def enter_name():
     name_win.protocol("WM_DELETE_WINDOW", lambda: None)     # 이름 입력창 못끔/못내림
 
 
+def that_is_dog_name(name1, name2):
+    dog_lists = ["호야", "하늘", "바다", "산", "개코"]
+    for dog in dog_lists:
+        if (dog in name1) or (dog in name2):
+            info(f"플레이어 이름에 '{dog}'이 포함되어 있음")
+            dog_img_win = tk.Toplevel(window)
+            dog_img_win.title('Dog')
+            if dog == "호야":
+                dog_image_label = Label(dog_img_win, image=dog_1_image)
+                dog_image_label.pack()
+            elif dog == "하늘":
+                dog_image_label = Label(dog_img_win, image=dog_2_image)
+                dog_image_label.pack()
+            elif dog == "바다":
+                dog_image_label = Label(dog_img_win, image=dog_3_image)
+                dog_image_label.pack()
+            elif dog == "산":
+                dog_image_label = Label(dog_img_win, image=dog_4_image)
+                dog_image_label.pack()
+            elif dog == "개코":
+                dog_image_label = Label(dog_img_win, image=dog_nose_image)
+                dog_image_label.pack()
+
+
 enter_name_bt = tk.Button(master=window, text='Game Start', font=('Arial', 15), width=25, height=3,
                           command=enter_name)
 enter_name_bt.place(x=450, y=480)
@@ -124,9 +124,8 @@ def quit_win():
     window.quit()
 
 
-enter_name_bt = tk.Button(master=window, text='Quit', font=('Arial', 15), width=25, height=3,
-                          command=quit_win)
-enter_name_bt.place(x=450, y=600)
+quit_bt = tk.Button(master=window, text='Quit', font=('Arial', 15), width=25, height=3, command=quit_win)
+quit_bt.place(x=450, y=600)
 
 
 def select_game_mode():
