@@ -137,7 +137,20 @@ def select_game_mode():
 
     def show_description(mode):     # 게임 시작 전 게임 설명 메세지 박스(윈도우로 바꿀 수도 있음) 출력
         if mode == "game_3x3":
-            Messagebox.showinfo('3x3 Tic-Tac-Toe', "How To Play '3x3 Tic-Tac-Toe'")
+            desc_win = tk.Toplevel(window)
+            desc_win.title("How To Play '3x3 TicTacToe'")
+            desc_win.resizable(False, False)
+
+            desc_rule_label = Label(desc_win, text='''[ 게임 규칙 ]
+
+                        1. 플레이어는 자신의 차례에 3x3 보드의 빈 공간에 자신의 마크(X 또는 O)를 놓습니다.
+                        2. 플레이어가 가로, 세로 또는 대각선 방향으로 연속된 세 개의 마크를 놓으면 승리합니다.
+                        3. 연속된 세 개의 마크가 놓이지 않은 채 보드에 빈 공간이 사라진 경우 무승부로 판정됩니다.
+                        ''', font=('Arial', 15))
+            desc_rule_label.grid(padx=10)
+
+            image_label = Label(desc_win, image=desc_game_3x3_image)
+            image_label.grid(row=1, pady=20)
 
         if mode == "game_6x6":
             desc_win = tk.Toplevel(window)
