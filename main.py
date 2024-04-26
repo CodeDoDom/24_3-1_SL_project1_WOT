@@ -18,7 +18,7 @@ from FourMok_6x6 import FourMok
 # 티킨터 생성
 window = tk.Tk()
 window.title('W.O.T\tWorld Of Tic-Tac-Toe')
-window.geometry('800x800+0+0')
+window.geometry('800x750+0+0')
 window.resizable(False, False)
 
 image_game_3x3_path = "3x3_TicTacToe.png"
